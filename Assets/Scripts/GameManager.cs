@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour {
     public BoardManager boardScript;
     public int playerFoodPoints = 100;
     public float turnDelay = .1f;
-    public float levelStartDelay = .30f;
+    public float levelStartDelay = 5f;
 
     [HideInInspector]
     public bool playersTurn = true;
@@ -41,6 +41,7 @@ public class GameManager : MonoBehaviour {
     }
 
     private void HideLevelImage() {
+        Debug.Log("Image OFF: " + Time.realtimeSinceStartup);
         levelImage.SetActive(false);
         doingSetup = false;
     }
@@ -51,7 +52,9 @@ public class GameManager : MonoBehaviour {
         levelImage = GameObject.Find("LevelImage");
         levelText = GameObject.Find("LevelText").GetComponent<Text>();
         levelText.text = "Day " + level;
+        Debug.Log("Image ON: " + Time.realtimeSinceStartup);
         levelImage.SetActive(true);
+        Debug.Log("DELAY " + levelStartDelay);
         Invoke("HideLevelImage", levelStartDelay);
 
         enemies.Clear();
