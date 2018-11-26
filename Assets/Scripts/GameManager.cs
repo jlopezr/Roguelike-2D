@@ -23,11 +23,12 @@ public class GameManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Awake () {
-        if(instance == null) {
+        if (instance == null){
             instance = this;
-        } else if(instance != this) {
+        } else if (instance != this) {
             Destroy(gameObject);
         }
+
         DontDestroyOnLoad(gameObject);
         boardScript = GetComponent<BoardManager>();
         enemies = new List<Enemy>();

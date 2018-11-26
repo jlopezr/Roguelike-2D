@@ -20,7 +20,25 @@ public abstract class MovingObject : MonoBehaviour {
         rb2d = GetComponent<Rigidbody2D>();
         inverseMoveTime = 1f / moveTime;
 	}
-	
+
+    protected bool CanMove(int xDir, int yDir)
+    {
+        RaycastHit2D hit;
+        Vector2 start = transform.position;
+        Vector2 end = start + new Vector2(xDir, yDir);
+
+        boxCollider.enabled = false;
+        hit = Physics2D.Linecast(start, end, blockingLayer);
+        boxCollider.enabled = true;
+
+        if (hit.transform == null)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
     protected bool Move(int xDir, int yDir, out RaycastHit2D hit) {
         Vector2 start = transform.position;
         Vector2 end = start + new Vector2(xDir, yDir);

@@ -35,7 +35,9 @@ public class Enemy : MovingObject {
         skipMove = true;
     }
 
-    public void MoveEnemy() {
+    public void MoveEnemy()
+    {
+        /*
         int xDir = 0;
         int yDir = 0;
 
@@ -44,9 +46,46 @@ public class Enemy : MovingObject {
         } else {
             xDir = target.position.x > transform.position.x ? 1 : -1;
         }
-        AttemptMove<Player>(xDir, yDir);
-    }
+        AttemptMove<Enemy>(xDir, yDir);
+        */
 
+        int xDir = 0;
+        int yDir = 0;
+        bool horizontal = false;
+        bool vertical = false;
+
+        if (Mathf.Abs(target.position.x - transform.position.x) > float.Epsilon)
+        {
+            horizontal = true;
+        }
+        if (Mathf.Abs(target.position.y - transform.position.y) > float.Epsilon)
+        {
+            vertical = true;
+        }
+
+        if(vertical) {
+            xDir = 0;
+            yDir = target.position.y > transform.position.y ? 1 : -1;
+            if(CanMove(xDir,yDir)) {
+                AttemptMove<Enemy>(xDir, yDir);
+                return;
+            }
+        }
+
+        if (horizontal)
+        {
+            xDir = target.position.x > transform.position.x ? 1 : -1;
+            yDir = 0;
+            if (CanMove(xDir, yDir))
+            {
+                AttemptMove<Enemy>(xDir, yDir);
+                return;
+            }
+
+        }
+
+
+    }
     protected override void OnCantMove<T>(T component)
     {
         Player hitPlayer = component as Player;
