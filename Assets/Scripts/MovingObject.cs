@@ -1,6 +1,4 @@
-﻿//TODO Voy por el video 7
-
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -30,8 +28,8 @@ public abstract class MovingObject : MonoBehaviour {
         boxCollider.enabled = false;
         hit = Physics2D.Linecast(start, end, blockingLayer);
         boxCollider.enabled = true;
-
-        if (hit.transform == null)
+        
+        if (hit.transform == null || hit.transform.gameObject.tag=="Player")
         {
             return true;
         }

@@ -36,19 +36,7 @@ public class Enemy : MovingObject {
     }
 
     public void MoveEnemy()
-    {
-        /*
-        int xDir = 0;
-        int yDir = 0;
-
-        if(Mathf.Abs(target.position.x - transform.position.x) < float.Epsilon) {
-            yDir = target.position.y > transform.position.y ? 1 : -1;
-        } else {
-            xDir = target.position.x > transform.position.x ? 1 : -1;
-        }
-        AttemptMove<Enemy>(xDir, yDir);
-        */
-
+    {        
         int xDir = 0;
         int yDir = 0;
         bool horizontal = false;
@@ -67,7 +55,7 @@ public class Enemy : MovingObject {
             xDir = 0;
             yDir = target.position.y > transform.position.y ? 1 : -1;
             if(CanMove(xDir,yDir)) {
-                AttemptMove<Enemy>(xDir, yDir);
+                AttemptMove<Player>(xDir, yDir);
                 return;
             }
         }
@@ -78,7 +66,7 @@ public class Enemy : MovingObject {
             yDir = 0;
             if (CanMove(xDir, yDir))
             {
-                AttemptMove<Enemy>(xDir, yDir);
+                AttemptMove<Player>(xDir, yDir);
                 return;
             }
 

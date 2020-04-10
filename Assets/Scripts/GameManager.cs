@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour {
         DontDestroyOnLoad(gameObject);
         boardScript = GetComponent<BoardManager>();
         enemies = new List<Enemy>();
+       
         InitGame();
 	}
 
@@ -41,8 +42,7 @@ public class GameManager : MonoBehaviour {
         InitGame();
     }
 
-    private void HideLevelImage() {
-        Debug.Log("Image OFF: " + Time.realtimeSinceStartup);
+    private void HideLevelImage() {        
         levelImage.SetActive(false);
         doingSetup = false;
     }
@@ -52,10 +52,8 @@ public class GameManager : MonoBehaviour {
 
         levelImage = GameObject.Find("LevelImage");
         levelText = GameObject.Find("LevelText").GetComponent<Text>();
-        levelText.text = "Day " + level;
-        Debug.Log("Image ON: " + Time.realtimeSinceStartup);
-        levelImage.SetActive(true);
-        Debug.Log("DELAY " + levelStartDelay);
+        levelText.text = "Day " + level;        
+        levelImage.SetActive(true);        
         Invoke("HideLevelImage", levelStartDelay);
 
         enemies.Clear();
