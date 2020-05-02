@@ -21,6 +21,7 @@ public class Player : MovingObject
     public AudioClip gameOverSound;
 
     private Animator animator;
+    private SpriteRenderer spriteRenderer;
     private int food;
     private Vector2 touchOrigin = -Vector2.one;
 
@@ -28,6 +29,7 @@ public class Player : MovingObject
     protected override void Start()
     {
         animator = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
         food = GameManager.instance.playerFoodPoints;
         foodText.text = "Food: " + food;
         base.Start();
@@ -78,6 +80,17 @@ public class Player : MovingObject
         }
 
 #endif
+        
+        if(horizontal < 0)
+        {
+            spriteRenderer.flipX = true;
+        }
+
+        if (horizontal > 0)
+        {
+            spriteRenderer.flipX = false;
+        }
+
 
         if (horizontal != 0 || vertical != 0) {
             AttemptMove<Wall>(horizontal, vertical);
