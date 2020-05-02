@@ -9,6 +9,7 @@ public class Enemy : MovingObject {
     public AudioClip enemyAttack2;
 
     private Animator animator;
+    private SpriteRenderer spriteRenderer;
     private Transform target;
     private bool skipMove;
 
@@ -16,6 +17,7 @@ public class Enemy : MovingObject {
 	protected override void Start () {
         GameManager.instance.AddEnemyToList(this);
         animator = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
         target = GameObject.FindGameObjectWithTag("Player").transform;
         base.Start();
 	}
@@ -64,6 +66,17 @@ public class Enemy : MovingObject {
         {
             xDir = target.position.x > transform.position.x ? 1 : -1;
             yDir = 0;
+
+            // Flips sprite following horizontal direction
+            if(xDir < 0)
+            {
+                spriteRenderer.flipX = false;
+            } else
+            {
+                spriteRenderer.flipX = true;
+            }
+
+
             if (CanMove(xDir, yDir))
             {
                 AttemptMove<Player>(xDir, yDir);
